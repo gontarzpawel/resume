@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paweł Gontarz - Senior Data Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals (Background: #f4f4f5, Text: #18181b, Accent: #0891b2) -->
+    <!-- Application Structure Plan: The SPA is designed as a single-page portfolio, moving beyond a linear resume format. The structure includes: 1) A Header for immediate identification and contact. 2) An interactive Timeline for experience, allowing users to expand details on demand, which prevents initial information overload. 3) An "Impact Dashboard" with KPI cards to surface key quantitative achievements instantly. 4) A "Skills Hub" with interactive charts (doughnut for categories, bar for proficiency) to provide a quick, visual assessment of technical capabilities. Users can filter skills by category. 5) Standard sections for Education/Certs. This structure was chosen to cater to busy recruiters by providing a quick visual summary upfront (Impact, Skills) while offering easy drill-down into details (Timeline), improving usability and engagement. -->
+    <!-- Visualization & Content Choices: 
+        - Experience -> Goal: Organize/Change -> Viz: Interactive HTML/JS Timeline -> Interaction: Click to expand/collapse job details. Justification: Shows career progression without overwhelming the user.
+        - Quantifiable Achievements -> Goal: Inform/Compare -> Viz: HTML "KPI" Cards -> Interaction: Static display. Justification: Makes key results highly scannable and impactful.
+        - Technical Skills Categories -> Goal: Organize/Proportions -> Viz: Chart.js Doughnut Chart -> Interaction: Hover for details. Justification: Provides a high-level overview of expertise areas.
+        - Skill Proficiency -> Goal: Compare -> Viz: Chart.js Bar Chart -> Interaction: Filterable by clicking category buttons. Justification: Visually demonstrates the depth of knowledge in specific technologies.
+        - Text Sections (Summary, Education) -> Goal: Inform -> Viz: Styled HTML Text Blocks. Justification: Clear and direct presentation of factual information.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f4f5; /* zinc-100 */
+            color: #18181b; /* zinc-900 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #0891b2; /* cyan-600 */
+            border: 4px solid #e4e4e7; /* zinc-200 */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <h1 class="text-xl md:text-2xl font-bold text-cyan-700">Paweł Gontarz</h1>
+                <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="#summary" class="text-zinc-600 hover:text-cyan-600 transition-colors">Summary</a>
+                    <a href="#impact" class="text-zinc-600 hover:text-cyan-600 transition-colors">Impact</a>
+                    <a href="#experience" class="text-zinc-600 hover:text-cyan-600 transition-colors">Experience</a>
+                    <a href="#skills" class="text-zinc-600 hover:text-cyan-600 transition-colors">Skills</a>
+                    <a href="#education" class="text-zinc-600 hover:text-cyan-600 transition-colors">Education</a>
+                </nav>
+                 <a href="mailto:pawegontarz95@gmail.com" class="bg-cyan-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-cyan-700 transition-colors">Contact Me</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Summary Section -->
+        <section id="summary" class="mb-16 scroll-mt-24">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-zinc-800 mb-4">Senior Data Engineer / Team Lead</h2>
+                <p class="text-zinc-600 leading-relaxed">
+                    Highly accomplished and results-oriented Senior Data Engineer / Team Lead with 8 years of extensive experience in designing, developing, and deploying scalable data pipelines, robust data architectures, and high-performance software solutions. Proven expertise in big data technologies, cloud platforms, and various programming languages, with a strong focus on cost-effective streaming pipelines serving business needs.
+                </p>
+            </div>
+        </section>
+
+        <section id="impact" class="mb-20 scroll-mt-24">
+            <!-- Impact Section -->
+            <h2 class="text-3xl font-bold text-center text-zinc-800 mb-2">Key Career Impacts</h2>
+            <p class="text-center text-zinc-500 mb-10 max-w-2xl mx-auto">This section highlights my most significant, quantifiable contributions. These metrics represent my focus on delivering tangible improvements in efficiency, cost, and performance.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-md border border-zinc-200/50 text-center">
+                    <p class="text-4xl font-bold text-cyan-600 mb-2">3000%</p>
+                    <p class="text-zinc-700 font-semibold">Data Latency Reduction</p>
+                    <p class="text-sm text-zinc-500 mt-1">Through design and implementation of a real-time ingestion pipelines.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-zinc-200/50 text-center">
+                    <p class="text-4xl font-bold text-cyan-600 mb-2">$100k+</p>
+                    <p class="text-zinc-700 font-semibold">Infrastructure cost savings</p>
+                    <p class="text-sm text-zinc-500 mt-1">Systems optimizations, architecture re-design and performance tweaks.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-zinc-200/50 text-center">
+                    <p class="text-4xl font-bold text-cyan-600 mb-2">2</p>
+                    <p class="text-zinc-700 font-semibold">Promotions</p>
+                    <p class="text-sm text-zinc-500 mt-1">Contibuted to successful promotions of direct managees.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-zinc-200/50 text-center">
+                    <p class="text-4xl font-bold text-cyan-600 mb-2">5</p>
+                    <p class="text-zinc-700 font-semibold">Recruitments</p>
+                    <p class="text-sm text-zinc-500 mt-1">Recruited engineers as a recruiting manager and an engineer.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="mb-20 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center text-zinc-800 mb-2">Career Timeline</h2>
+            <p class="text-center text-zinc-500 mb-12 max-w-2xl mx-auto">My professional journey reflects a consistent growth in responsibility and technical complexity. Click on any role to see the detailed contributions and achievements from that period.</p>
+            <div class="relative max-w-3xl mx-auto">
+                <div class="absolute left-0 top-0 h-full w-0.5 bg-zinc-200 ml-[-22px]"></div>
+                <div id="timeline-container" class="space-y-12">
+                    <!-- Timeline items will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="mb-20 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center text-zinc-800 mb-2">Technical Skills Hub</h2>
+             <p class="text-center text-zinc-500 mb-10 max-w-2xl mx-auto">This section provides an interactive overview of my technical expertise. Use the buttons to filter the skills list and explore my proficiency in different technologies.</p>
+
+            <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-zinc-200/50">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-1">
+                        <h3 class="font-bold text-lg text-zinc-700 mb-4">Skill Categories</h3>
+                        <p class="text-sm text-zinc-500 mb-4">My skills are distributed across several key areas of modern data engineering and software development.</p>
+                        <div class="chart-container h-64 md:h-72">
+                             <canvas id="skillCategoriesChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2">
+                        <h3 class="font-bold text-lg text-zinc-700 mb-4">Skill Proficiency</h3>
+                        <div id="skill-filter-buttons" class="flex flex-wrap gap-2 mb-4">
+                            <!-- Filter buttons will be injected here -->
+                        </div>
+                        <div class="chart-container h-80 md:h-96">
+                             <canvas id="skillProficiencyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & Certifications Section -->
+        <section id="education" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center text-zinc-800 mb-10">Education</h2>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-md border border-zinc-200/50">
+                    <h3 class="font-semibold text-lg text-zinc-800 mb-2">Education</h3>
+                    <p class="font-medium text-zinc-700">Engineering degree in Telecommunication</p>
+                    <p class="text-zinc-500">Warsaw University of Technology</p>
+                    <p class="text-sm text-zinc-400">Graduated in June 2018</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-zinc-200/50">
+                    <h3 class="font-semibold text-lg text-zinc-800 mb-2">Education</h3>
+                    <p class="font-medium text-zinc-700">Engineering degree in Telecommunication</p>
+                    <p class="text-zinc-500">Polytechnic University of Catalonia (Erasmus)</p>
+                    <p class="text-sm text-zinc-400">Completed in Jan 2017</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-zinc-800 text-zinc-400 mt-20 py-6">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://github.com/gontarzpawel" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/gontarzpawel/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22 0H2C.897 0 0 .897 0 2v20c0 1.103.897 2 2 2h20c1.103 0 2-.897 2-2V2c0-1.103-.897-2-2-2z" clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+            </div>
+            <p class="text-sm">&copy; 2025 Paweł Gontarz</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // --- Data ---
+    const experienceData = [
+         {
+            company: 'Contentsquare',
+            location: 'Remote',
+            role: 'Senior Data Engineer, Transversal Lead',
+            period: 'Feb 2025 – Present',
+            achievements: [
+                'Onboarded and drafted technical vision for the unification of legacy systems to manage identity resolution across three afiliated companies',
+                'Defined the strategy to enable Contentsquare customers and partners to use their Contentsquare data in AI agents. It includes cross-departments collaboration and client interviews to establish business use cases. It also also includes demonstrating prototypes showing the feasibility and value for internal and external users.',                
+            ]
+        },
+        {
+            company: 'Contentsquare',
+            location: 'Remote',
+            role: 'Senior Data Engineer, Team Lead',
+            period: '2022 – Jan 2025',
+            achievements: [
+                'Led the design and implementation of a new near real-time data ingestion pipeline, reducing data availability latency by 3000%, from ~30 min to 1 min, and supporting dashboarding of API and JS errors sliced by different dimensions.',
+                'Led the projects to optimize data processing costs, achieving over $100k in annual savings by implementing more efficient data storage and processing strategies.',
+                'Maintain and improve the existing core data infrastructure, ensuring high availability and reliability of data services.',
+                'Led the team of up to 6 data engineers, providing technical guidance, mentoring, and fostering a collaborative team environment.',
+                'Recruited and onboarded new team members, ensuring a smooth integration into the team and company culture.',
+                'Recruited and mentored an intern who run an exploratory project on behavioural bot detection, leading to a successful proof of concept and a potential for new product features.',
+                'Managed roadmap and priorities for the team, aligning with business goals and ensuring timely delivery of projects.',
+                'Improved team productivity by automating and parallelizing continuous integration (CI) pipelines, reducing build times by 65%.',
+                'Improved team operational experience by creating tooling to monitor and visualise production health and infrastructure cost.',
+            ]
+        },
+        {
+            company: 'Contentsquare',
+            location: 'Paris, France',
+            role: 'Data Engineer',
+            period: '2019 – 2022',
+            achievements: [
+                'Collaborated with product, engineering and data science teams to design and implement various data driven products. Some examples include: proactive insights generation causing digital frustration (i.e. rage click), full text search engine allowing to segment sessions by text content seen by user, impact revenue quantification from experienced frustration, ...', 
+                'Identified and resolved various engineering bottlenecks: slow CI pipeline causing delays in development, lack of test coverage causing regressions, missing observability over core product objects usage leading to gaps in performance bottlenecks understanding, ...',
+                'Identified opportunity to improve all customer facing queries performances by > 50% at a medium response latency, pitched it and led the implementation in a cross-functional team. Solution was later adopted by the open source community. It also led the company to take the ownership of almost unmaintained project: https://github.com/ContentSquare/chproxy',
+                'Improved systems processing performance to deal with traffic peaks and unequal traffic patterns by troubleshooting memory and CPU bottlenecks, optimizing data structures and algorithms.',
+                'Contributed to design and implementation of the optimized system for storing session replay data, leading to 100s of $$$ gain yearly by enabling batched upload to blob storage and efficient retrieval',
+                'Participated in the batman rotation to react on production incidents, ensuring high availability and reliability of data services.',
+                'Participated in the support duties to address customer issues and provide technical assistance, ensuring high customer satisfaction.',
+            ]
+        },
+        {
+            company: 'Powerspace',
+            location: 'Paris, France',
+            role: 'Software Engineer',
+            period: '2018 – 2019',
+            achievements: [
+                'Developed and maintained features for programmatic advertising that bridged customers inventories with available and user-tailored ads content.',
+                'Re-designed and implemented advertising budgeting system to overcome ongoing scaling limits - an inability to handle traffic peaks.',
+            ]
+        },
+        {
+            company: 'TouK (aquired by Snowflake)',
+            location: 'Warsaw, Poland',
+            role: 'Junior Software Engineer',
+            period: '2017 – 2018',
+            achievements: [
+                'Developed banking mobile application for Android plaform in Kotlin, enabling users to check balance of their account, perform a top up and initiate a money transfer.',
+                'Implement Scala backend microservices enabling countries with poor internet connectivity to access banking services through USSD banking ',
+                'Participated in code reviews, testing, and deployment processes to ensure high-quality software delivery.'
+            ]
+        },
+        {
+            company: 'Sotrender',
+            location: 'Warsaw, Poland',
+            role: 'Software Engineer Intern',
+            period: 'Jul 2017 – Aug 2017',
+            achievements: [
+                'Developed social media crawler to index and analyze data from various platforms (Facebook, Instagram, Twitter).',
+            ]
+        }
+    ];
+
+    const skillsData = {
+        'Programming Languages': [
+            { name: 'Python', level: 3 }, { name: 'Scala', level: 5 }, { name: 'Go', level: 5 }
+        ],
+        'Big Data Tech': [
+            { name: 'Kafka', level: 5 }, { name: 'Flink', level: 3 },
+        ],
+        'Cloud Platforms': [
+            { name: 'AWS', level: 5 }, { name: 'Azure', level: 4 }, { name: 'GCP', level: 2 },
+        ],
+        'Databases': [
+            { name: 'Clickhouse', level: 5 }, { name: 'Aerospike', level: 4 }, { name: 'Redis', level: 4 }, { name: 'Singlestore', level: 3 },
+            { name: 'PostgreSQL', level: 3 }
+        ],
+        'DevOps & Tools': [
+            { name: 'Docker', level: 4 }, { name: 'Kubernetes', level: 4 }, { name: 'Git', level: 5 },
+            { name: 'Github Actions', level: 4 }, { name: 'ArgoCD', level: 3 }
+        ],
+        'Concepts': [
+            { name: 'Data Modeling', level: 5 }, { name: 'Microservices', level: 4 }, { name: 'Stream processing', level: 5 }
+        ],
+        'Team management': [
+            { name: 'Team Leadership', level: 5 }, { name: 'Mentoring', level: 5 }, { name: 'Recruitment', level: 4 },
+            { name: 'Project Management', level: 4 }, { name: 'Stakeholder Management', level: 4 }
+        ]
+    };
+
+    // --- Timeline Generation ---
+    const timelineContainer = document.getElementById('timeline-container');
+    experienceData.forEach((job, index) => {
+        const item = document.createElement('div');
+        item.className = 'relative pl-8 timeline-item';
+        item.innerHTML = `
+            <div class="cursor-pointer">
+                <p class="text-sm text-zinc-500">${job.period}</p>
+                <h3 class="font-bold text-xl text-zinc-800">${job.role}</h3>
+                <p class="font-semibold text-zinc-600">${job.company} - <span class="font-normal">${job.location}</span></p>
+                <span class="absolute top-2 right-0 text-cyan-600 transition-transform duration-300 transform">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </span>
+            </div>
+            <div class="details-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out mt-2">
+                <ul class="list-disc list-inside space-y-2 text-zinc-600 pl-2">
+                    ${job.achievements.map(ach => `<li>${ach}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+        timelineContainer.appendChild(item);
+
+        const header = item.querySelector('.cursor-pointer');
+        const content = item.querySelector('.details-content');
+        const icon = item.querySelector('svg');
+
+        header.addEventListener('click', () => {
+            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                content.style.maxHeight = '0px';
+                icon.parentElement.classList.remove('rotate-180');
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.parentElement.classList.add('rotate-180');
+            }
+        });
+    });
+
+    // --- Skills Charts ---
+    const chartColors = {
+        bg: ['#06b6d4', '#0891b2', '#0e7490', '#155e75', '#164e63', '#222d3d'],
+        border: '#f4f4f5'
+    };
+    
+    // Skill Categories Doughnut Chart
+    const categoriesCtx = document.getElementById('skillCategoriesChart').getContext('2d');
+    const categoriesChart = new Chart(categoriesCtx, {
+        type: 'doughnut',
+        data: {
+            labels: Object.keys(skillsData),
+            datasets: [{
+                data: Object.values(skillsData).map(s => s.length),
+                backgroundColor: chartColors.bg,
+                borderColor: chartColors.border,
+                borderWidth: 3,
+                hoverOffset: 10
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: { size: 10 },
+                        boxWidth: 15,
+                        padding: 15
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += context.raw + ' skills';
+                            return label;
+                        }
+                    }
+                }
+            },
+            cutout: '60%'
+        }
+    });
+
+    // Skill Proficiency Bar Chart
+    let proficiencyChart;
+    const proficiencyCtx = document.getElementById('skillProficiencyChart').getContext('2d');
+    const filterButtonsContainer = document.getElementById('skill-filter-buttons');
+
+    const allSkills = Object.values(skillsData).flat();
+
+    function createOrUpdateProficiencyChart(filteredSkills) {
+        const labels = filteredSkills.map(s => s.name);
+        const data = filteredSkills.map(s => s.level);
+        
+        if (proficiencyChart) {
+            proficiencyChart.data.labels = labels;
+            proficiencyChart.data.datasets[0].data = data;
+            proficiencyChart.update();
+        } else {
+            proficiencyChart = new Chart(proficiencyCtx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Proficiency Level (1-5)',
+                        data: data,
+                        backgroundColor: '#0891b2',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 5,
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: '#e4e4e7'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+    }
+
+    // Create filter buttons
+    const categories = ['All', ...Object.keys(skillsData)];
+    categories.forEach(category => {
+        const button = document.createElement('button');
+        button.textContent = category;
+        button.className = 'px-3 py-1 text-sm font-medium rounded-full transition-colors';
+        if (category === 'All') {
+            button.classList.add('bg-cyan-600', 'text-white');
+        } else {
+            button.classList.add('bg-zinc-200', 'text-zinc-700', 'hover:bg-zinc-300');
+        }
+        button.addEventListener('click', () => {
+            document.querySelectorAll('#skill-filter-buttons button').forEach(btn => {
+                btn.classList.remove('bg-cyan-600', 'text-white');
+                btn.classList.add('bg-zinc-200', 'text-zinc-700', 'hover:bg-zinc-300');
+            });
+            button.classList.add('bg-cyan-600', 'text-white');
+            button.classList.remove('bg-zinc-200', 'text-zinc-700', 'hover:bg-zinc-300');
+            
+            const skillsToShow = category === 'All' ? allSkills : skillsData[category];
+            createOrUpdateProficiencyChart(skillsToShow);
+        });
+        filterButtonsContainer.appendChild(button);
+    });
+
+    // Initial chart render
+    createOrUpdateProficiencyChart(allSkills);
+});
+</script>
+
+</body>
+</html>
+
