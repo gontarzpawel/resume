@@ -50,6 +50,36 @@
             background-color: #0891b2; /* cyan-600 */
             border: 4px solid #e4e4e7; /* zinc-200 */
         }
+        @media print {
+            body {
+                background-color: white;
+            }
+            .no-print {
+                display: none !important;
+            }
+            section {
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+            .details-content {
+                max-height: none !important;
+                overflow: visible !important;
+            }
+            canvas {
+                max-height: 300px !important;
+            }
+            @page {
+                margin: 1.5cm;
+                size: A4;
+            }
+            .timeline-item::before {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+            .bg-white {
+                box-shadow: none !important;
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -66,7 +96,15 @@
                     <a href="#skills" class="text-zinc-600 hover:text-cyan-600 transition-colors">Skills</a>
                     <a href="#education" class="text-zinc-600 hover:text-cyan-600 transition-colors">Education</a>
                 </nav>
-                 <a href="mailto:pawegontarz95@gmail.com" class="bg-cyan-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-cyan-700 transition-colors">Contact Me</a>
+                <div class="flex space-x-3">
+                    <button onclick="exportToPDF()" class="no-print bg-white border border-cyan-600 text-cyan-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-cyan-50 transition-colors flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Export PDF
+                    </button>
+                    <a href="mailto:pawegontarz95@gmail.com" class="bg-cyan-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-cyan-700 transition-colors">Contact Me</a>
+                </div>
             </div>
         </div>
     </header>
@@ -190,6 +228,32 @@
     </footer>
 
 <script>
+    // Function to handle PDF export
+    function exportToPDF() {
+        // Expand all timeline items before printing
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            const content = item.querySelector('.details-content');
+            const icon = item.querySelector('svg');
+            content.style.maxHeight = content.scrollHeight + 'px';
+            icon.parentElement.classList.add('rotate-180');
+        });
+
+        // Wait for any animations to complete
+        setTimeout(() => {
+            window.print();
+
+            // Reset timeline items after printing
+            setTimeout(() => {
+                document.querySelectorAll('.timeline-item').forEach(item => {
+                    const content = item.querySelector('.details-content');
+                    const icon = item.querySelector('svg');
+                    content.style.maxHeight = '0px';
+                    icon.parentElement.classList.remove('rotate-180');
+                });
+            }, 100);
+        }, 300);
+    }
+
 document.addEventListener('DOMContentLoaded', function () {
     // --- Data ---
     const experienceData = [
